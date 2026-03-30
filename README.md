@@ -23,7 +23,7 @@ A Portuguese bank ran phone-based marketing campaigns to sell term deposit subsc
 
 ## Dataset
 
-**Source:** [Kaggle](https://archive.ics.uci.edu/ml/datasets/Bank+Marketing](https://www.kaggle.com/datasets/sahistapatel96/bankadditionalfullcsv)
+**Source:** [Kaggle](https://www.kaggle.com/datasets/sahistapatel96/bankadditionalfullcsv)  
 
 **File:** `bank-additional-full.csv`
 
