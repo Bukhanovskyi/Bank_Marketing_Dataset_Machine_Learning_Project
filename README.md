@@ -1,6 +1,30 @@
 # Bank Marketing Dataset Machine Learning Project
 
-**Dataset from Kaggle:** https://www.kaggle.com/datasets/sahistapatel96/bankadditionalfullcsv
+A full machine learning pipeline for predicting whether a bank client will subscribe to a term deposit, built as a mid-term project for an ML course.
+
+---
+
+## Problem Statement
+
+A Portuguese bank ran phone-based marketing campaigns to sell term deposit subscriptions. The goal is to build a binary classifier that predicts whether a client will subscribe (`yes` / `no`) based on client demographics, campaign data, and macroeconomic indicators.
+
+**Key challenge:** The dataset is heavily imbalanced — only **11.3%** of clients subscribed — making accuracy a misleading metric and requiring careful handling of class imbalance throughout the pipeline.
+
+| Property | Value |
+|---|---|
+| Rows | 41,188 |
+| Features | 21 |
+| Target | `y` (yes / no) |
+| Positive class | 4,640 (11.3%) |
+| Negative class | 36,548 (88.7%) |
+| Class imbalance ratio | 7.9 : 1 |
+
+---
+
+## Dataset
+
+**Source:** [Kaggle]([https://archive.ics.uci.edu/ml/datasets/Bank+Marketing](https://www.kaggle.com/datasets/sahistapatel96/bankadditionalfullcsv))  
+**File:** `bank-additional-full.csv`
 
 ## About Dataset
 ### Abstract
@@ -66,4 +90,53 @@ Input variables:
 20 - nr.employed: number of employees - quarterly indicator (numeric)
 
 **Output variable (desired target):**
+
 21 - y - has the client subscribed a term deposit? (binary: 'yes','no')
+
+## Models
+
+| Model | Test ROC-AUC | Test F1 | 
+|---|---|---|
+| Dummy Classifier | | | 
+| Logistic Regression |  |  | 
+| KNN (tuned) | |  | 
+| Decision Tree |  | | 
+| XGBoost |  |  | 
+| LightGBM | | |
+
+### Evaluation Strategy
+- **Primary metric:** ROC-AUC — threshold-independent, robust to imbalance
+- **Secondary metric:** Average Precision (area under PR curve)
+- **Operational metric:** F1 at tuned threshold
+- **CV strategy:** `StratifiedKFold(n_splits=5)` — preserves class ratio per fold
+- **Never used:** Accuracy — dummy classifier scores 89% by predicting always "no"
+
+### Threshold Tuning
+
+Default threshold of 0.5 is wrong for 11% positive class. Optimal threshold found by sweeping 0.05–0.70 and maximizing F1:
+
+```python
+best_threshold = ___
+# F1 improves from ___ (default) to ___ (tuned)
+```
+
+---
+
+##  Key Findings
+
+**From EDA:**
+- `euribor3m` is the strongest predictor — low interest rates drive subscription
+- `contacted_before` shows dramatic effect: 63.8% conversion for recently contacted vs 8.8% for never contacted
+- `period` matters hugely: Dec/Mar campaigns convert at 50% vs May at only 6.4%
+- `duration` would be the best feature but is post-hoc (data leakage — removed)
+
+**From Feature Importance:**
+- `euribor3m` dominates all other features by 3-4×
+- `contact_cellular` is the second most important feature
+- `period_may` acts as a strong negative signal
+- Most one-hot encoded dummies have near-zero importance
+
+**From Error Analysis:**
+- Model misses ~_______% of actual subscribers (False Negatives)
+- High-confidence False Positives share similar profiles — clients who look like subscribers on every feature but don't convert
+- Errors concentrate near the decision threshold — as expected for borderline cases
