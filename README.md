@@ -103,8 +103,8 @@ Input variables:
 | Decision Tree |0.8010|0.4603| 
 | XGBoost + RandomSearch|0.8071|0.5100| 
 | XGBoost + Hyperopt|0.8140|0.5049| 
-| LightGBM |0.8140|0.5049|
-| LightGBM with 0.54 threshold |0.8140|0.5112|
+| LightGBM |0.8141|0.5049|
+| LightGBM with 0.54 threshold |0.8141|0.5112|
 
 ### Evaluation Strategy
 - **Primary metric:** ROC-AUC — threshold-independent, robust to imbalance
