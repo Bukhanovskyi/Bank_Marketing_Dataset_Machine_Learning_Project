@@ -98,27 +98,26 @@ Input variables:
 
 | Model | Test ROC-AUC | Test F1 | 
 |---|---|---|
-| Dummy Classifier | | | 
-| Logistic Regression |  |  | 
-| KNN (tuned) | |  | 
-| Decision Tree |  | | 
-| XGBoost |  |  | 
-| LightGBM | | |
+| Logistic Regression |0.7932|0.4250| 
+| KNN (tuned) |0.7825|0.1933| 
+| Decision Tree |0.8010|0.4603| 
+| XGBoost + RandomSearch|0.8071|0.5100| 
+| XGBoost + Hyperopt|0.8140|0.5049| 
+| LightGBM |0.8140|0.5049|
+| LightGBM with 0.54 threshold |0.8140|0.5112|
 
 ### Evaluation Strategy
 - **Primary metric:** ROC-AUC — threshold-independent, robust to imbalance
 - **Secondary metric:** Average Precision (area under PR curve)
 - **Operational metric:** F1 at tuned threshold
-- **CV strategy:** `StratifiedKFold(n_splits=5)` — preserves class ratio per fold
-- **Never used:** Accuracy — dummy classifier scores 89% by predicting always "no"
 
 ### Threshold Tuning
 
 Default threshold of 0.5 is wrong for 11% positive class. Optimal threshold found by sweeping 0.05–0.70 and maximizing F1:
 
 ```python
-best_threshold = ___
-# F1 improves from ___ (default) to ___ (tuned)
+best_threshold = 0.54
+# F1 improves from 0.5030 (default) to 0.5112 (tuned)
 ```
 
 ---
@@ -129,15 +128,12 @@ best_threshold = ___
 - `euribor3m` is the strongest predictor — low interest rates drive subscription
 - `contacted_before` shows dramatic effect: 63.8% conversion for recently contacted vs 8.8% for never contacted
 - `period` matters hugely: Dec/Mar campaigns convert at 50% vs May at only 6.4%
-- `duration` would be the best feature but is post-hoc (data leakage — removed)
 
 **From Feature Importance:**
-- `euribor3m` dominates all other features by 3-4×
+- `euribor3m` dominates all other features
 - `contact_cellular` is the second most important feature
 - `period_may` acts as a strong negative signal
-- Most one-hot encoded dummies have near-zero importance
 
 **From Error Analysis:**
-- Model misses ~_______% of actual subscribers (False Negatives)
-- High-confidence False Positives share similar profiles — clients who look like subscribers on every feature but don't convert
-- Errors concentrate near the decision threshold — as expected for borderline cases
+- Model misses ~5% of actual subscribers (False Negatives)
+- Model interprets ~7% of clients who look like subscribers (False Positive)
