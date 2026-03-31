@@ -126,7 +126,7 @@ F1 improves from 0.5030 (default) to 0.5112 (tuned)
 **From EDA:**
 - `euribor3m` is the strongest predictor — low interest rates drive subscription
 - `contacted_before` shows dramatic effect: 63.8% conversion for recently contacted vs 8.8% for never contacted
-- `period` matters hugely: Dec/Mar campaigns convert at 50% vs May at only 6.4%
+- `period` matters hugely: Dec-Mar campaigns convert at 50% vs May at only 6.4%
 
 **From Feature Importance:**
 - `euribor3m` dominates all other features
