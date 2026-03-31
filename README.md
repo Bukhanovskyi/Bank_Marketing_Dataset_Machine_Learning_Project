@@ -99,7 +99,7 @@ Input variables:
 | Model | Test ROC-AUC | Test F1 | 
 |---|---|---|
 | Logistic Regression |0.7932|0.4250| 
-| KNN (tuned) |0.7825|0.1933| 
+| KNN |0.7825|0.1933| 
 | Decision Tree |0.8010|0.4603| 
 | XGBoost + RandomSearch|0.8071|0.5100| 
 | XGBoost + Hyperopt|0.8140|0.5049| 
