@@ -108,12 +108,11 @@ Input variables:
 
 ### Evaluation Strategy
 - **Primary metric:** ROC-AUC — threshold-independent, robust to imbalance
-- **Secondary metric:** Average Precision (area under PR curve)
-- **Operational metric:** F1 at tuned threshold
+- **Secondary metric:** F1 for balance between positive and negative class
 
 ### Threshold Tuning
 
-Default threshold of 0.5 is wrong for 11% positive class. Optimal threshold found by sweeping 0.05–0.70 and maximizing F1:
+Default threshold of 0.5 is wrong for 11% positive class. Optimal threshold found by sweeping 0.05–0.95 and maximizing F1:
 
 ```python
 best_threshold = 0.54
@@ -136,4 +135,4 @@ best_threshold = 0.54
 
 **From Error Analysis:**
 - Model misses ~5% of actual subscribers (False Negatives)
-- Model interprets ~7% of clients who look like subscribers (False Positive)
+- Ьodel incorrectly classifies ~7% of non-subscribers as subscribers (false positives)
