@@ -135,4 +135,4 @@ F1 improves from 0.5027 (default) to 0.5106 (tuned)
 
 **From Error Analysis:**
 - Model misses ~5% of actual subscribers (False Negatives)
-- Ьodel incorrectly classifies ~7% of non-subscribers as subscribers (false positives)
+- Model incorrectly classifies ~7% of non-subscribers as subscribers (false positives)
