@@ -115,8 +115,8 @@ Input variables:
 Default threshold of 0.5 is wrong for 11% positive class. Optimal threshold found by sweeping 0.05–0.95 and maximizing F1:
 
 ```python
-best_threshold = 0.54
-F1 improves from 0.5030 (default) to 0.5112 (tuned)
+best_threshold = 0.61
+F1 improves from 0.5027 (default) to 0.5106 (tuned)
 ```
 
 ---
