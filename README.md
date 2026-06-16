@@ -101,10 +101,10 @@ Input variables:
 | Logistic Regression |0.7932|0.4250| 
 | KNN |0.7825|0.1933| 
 | Decision Tree |0.8010|0.4603| 
-| XGBoost + RandomSearch|0.8071|0.5100| 
-| XGBoost + Hyperopt|0.8140|0.5099| 
-| LightGBM |0.8147|0.5027|
-| LightGBM with 0.61 threshold |0.8147|0.5106|
+| XGBoost + RandomSearch|0.8087|0.5111| 
+| XGBoost + Hyperopt|0.8127|0.4928| 
+| LightGBM |0.8134|0.5096|
+| LightGBM with 0.53 threshold |0.8134|0.5113|
 
 ### Evaluation Strategy
 - **Primary metric:** ROC-AUC — threshold-independent, robust to imbalance
@@ -115,8 +115,8 @@ Input variables:
 Default threshold of 0.5 is wrong for 11% positive class. Optimal threshold found by sweeping 0.05–0.95 and maximizing F1:
 
 ```python
-best_threshold = 0.61
-F1 improves from 0.5027 (default) to 0.5106 (tuned)
+best_threshold = 0.53
+F1 improves from 0.5096 (default) to 0.5113 (tuned)
 ```
 
 ---
